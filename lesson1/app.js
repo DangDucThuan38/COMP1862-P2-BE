@@ -7,8 +7,21 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
+
 var app = express();
 
+// Config MongoDb Libray
+var mongoose = require('mongoose');
+var database = "mongodb://localhost:27017/demo";
+
+mongoose.connect(database)
+  .then(() => console.log('Connected to MongoDB'))
+  .catch((err) => console.log('Error connecting: ' + err.message));
+
+
+
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false}));
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
